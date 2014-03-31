@@ -1,0 +1,14 @@
+.splitbtn, .splitbutton {
+  display: inline-block;
+  position: relative;
+}
+.splitbtn .options, .splitbutton .options {
+  display: inline-block;
+  position: relative;
+  width: 35px;
+  height: 35px;
+}
+
+.splitbutton .options {
+  font-weight: 12px;
+}

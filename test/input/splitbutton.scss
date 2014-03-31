@@ -1,0 +1,22 @@
+// ----
+// Sass (v3.2.14)
+// Compass (v0.12.3)
+// ----
+
+.splitbtn {
+  display: inline-block;
+  position: relative;
+  .options {
+    display: inline-block;
+    position: relative;
+    width: 35px;
+    height: 35px;
+  }
+}
+
+.splitbutton {
+  @extend .splitbtn;
+  .options {
+    font-weight: 12px;
+  }
+}

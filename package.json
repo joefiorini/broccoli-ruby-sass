@@ -1,0 +1,47 @@
+{
+  "name": "broccoli-ruby-sass",
+  "version": "0.0.1",
+  "description": "Broccoli plugin that compiles Sass using the Ruby-based compiler",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha test/broccoli-ruby-sass-test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/joefiorini/broccoli-ruby-sass"
+  },
+  "keywords": [
+    "broccoli-plugin",
+    "sass",
+    "scss",
+    "css",
+    "ruby"
+  ],
+  "author": "Joe Fiorini",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/joefiorini/broccoli-ruby-sass/issues"
+  },
+  "homepage": "https://github.com/joefiorini/broccoli-ruby-sass",
+  "devDependencies": {
+    "rsvp": "^3.0.6",
+    "chai": "^1.9.1",
+    "chai-as-promised": "^4.1.1",
+    "mocha": "^1.18.2",
+    "broccoli": "^0.5.0"
+  },
+  "dependencies": {
+    "mkdirp": "^0.3.5",
+    "quick-temp": "^0.1.0",
+    "promise-map-series": "^0.2.0",
+    "dargs": "^0.1.0",
+    "win-spawn": "^2.0.0",
+    "include-path-searcher": "^0.1.0",
+    "lodash": "^2.4.1",
+    "broccoli-static-compiler": "^0.1.2",
+    "rsvp": "^3.0.6"
+  }
+}
