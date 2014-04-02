@@ -10,8 +10,8 @@ var spawn = require('win-spawn');
 var Promise = require('rsvp').Promise;
 
 module.exports = SassCompiler;
-function SassCompiler (sourceTrees, inputFile, outputFile, options) {
-  if (!(this instanceof SassCompiler)) return new SassCompiler(sourceTrees, inputFile, outputFile, options);
+function SassCompiler (sourceTrees, inputFile, outputFile, options, customArgs) {
+  if (!(this instanceof SassCompiler)) return new SassCompiler(sourceTrees, inputFile, outputFile, options, customArgs);
   this.sourceTrees = sourceTrees;
   this.inputFile = inputFile;
   this.outputFile = outputFile;
@@ -24,6 +24,7 @@ function SassCompiler (sourceTrees, inputFile, outputFile, options) {
     bundleExec: options.bundleExec,
     loadPath: options.loadPath || []
   };
+  this.customArgs = customArgs || [];
 }
 
 SassCompiler.prototype.read = function (readTree) {
@@ -32,6 +33,7 @@ SassCompiler.prototype.read = function (readTree) {
   quickTemp.makeOrRemake(this, '_tmpDestDir');
   var destFile = this._tmpDestDir + '/' + this.outputFile;
   mkdirp.sync(path.dirname(destFile));
+
   return mapSeries(this.sourceTrees, readTree)
     .then(function (includePaths) {
       includePaths.unshift(path.dirname(self.inputFile));
@@ -41,7 +43,7 @@ SassCompiler.prototype.read = function (readTree) {
         'sass',
         includePathSearcher.findFileSync(self.inputFile, includePaths),
         destFile
-      ].concat(passedArgs);
+      ].concat(passedArgs).concat(self.customArgs);
 
       if(bundleExec) {
         args.unshift('bundle', 'exec');
