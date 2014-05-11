@@ -22,6 +22,7 @@ function SassCompiler (sourceTrees, inputFile, outputFile, options) {
     sourceComments: options.sourceComments,
     sourcemap: options.sourceMap,
     bundleExec: options.bundleExec,
+    require: options.require,
     loadPath: options.loadPath || []
   };
 }
