@@ -1,6 +1,6 @@
 {
   "name": "broccoli-ruby-sass",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Broccoli plugin that compiles Sass using the Ruby-based compiler",
   "main": "index.js",
   "directories": {
