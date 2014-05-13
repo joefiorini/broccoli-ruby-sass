@@ -72,6 +72,10 @@ SassCompiler.prototype.read = function (readTree) {
           errors += data;
         });
 
+        cp.stderr.on('data', function(data) {
+          errors += data;
+        });
+
         cp.on('close', function(code) {
           if(errors) {
             console.error('[broccoli-ruby-sass] ' + errors);
