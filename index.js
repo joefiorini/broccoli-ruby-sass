@@ -56,9 +56,18 @@ SassCompiler.prototype.read = function (readTree) {
         var cmd = args.shift();
         var cp = spawn(cmd, args);
 
+        function isWarning(error) {
+          return /DEPRECATION WARNING/.test(error.toString()) || /WARNING:/.test(error.toString());
+        }
+
         cp.on('error', function(err) {
-            console.error('[broccoli-ruby-sass] '+ err);
-            reject(err);
+          if (isWarning(err)) {
+            console.warn(err);
+            return;
+          }
+
+          console.error('[broccoli-ruby-sass] '+ err);
+          reject(err);
         });
 
         var errors = '';
@@ -66,7 +75,8 @@ SassCompiler.prototype.read = function (readTree) {
         cp.on('data', function(data) {
           // ignore deprecation warnings
 
-          if (/DEPRECATION WARNING/.test(data) || /WARNING:/.test(data)) {
+          if (isWarning(err)) {
+            console.warn(err);
             return;
           }
 
@@ -74,17 +84,15 @@ SassCompiler.prototype.read = function (readTree) {
         });
 
         cp.stderr.on('data', function(data) {
-          if (!(/DEPRECATION WARNING/.test(data) || /WARNING:/.test(data))) {
+          if (!isWarning(data)) {
             errors += data;
-          }
-          else {
-            console.warn('[broccoli-ruby-sass] ' + data)
+          } else {
+            console.warn('[broccoli-ruby-sass] ' + data);
           }
         });
 
         cp.on('close', function(code) {
           if(errors) {
-            console.error('[broccoli-ruby-sass] ' + errors);
             reject(errors);
           }
 
