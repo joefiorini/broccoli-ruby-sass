@@ -23,7 +23,10 @@ function SassCompiler (sourceTrees, inputFile, outputFile, options) {
     sourcemap: options.sourceMap,
     bundleExec: options.bundleExec,
     require: options.require,
-    loadPath: options.loadPath || []
+    loadPath: options.loadPath || [],
+    cacheLocation: options.cacheLocation,
+    precision: options.precision,
+    unixNewlines: options.unixNewlines
   };
 }
 
