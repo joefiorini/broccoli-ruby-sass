@@ -62,7 +62,7 @@ Default: true
 Print out comments in the compiled CSS that tell you the original line of the
 source.
 
-# require
+### require
 
 Type: string
 
@@ -70,7 +70,7 @@ Require a ruby library before running the SASS compiler.
 By default, requires no ruby library.
 ``
 
-# bundleExec
+### bundleExec
 
 Type: boolean
 Default: false
@@ -78,19 +78,19 @@ Default: false
 Use [bundler][bundler] when running ruby. Useful for
 locking down the ruby version between projects.
 
-# loadPath
+### loadPath
 
 Type: string
 Default: ''
 
-# unixNewlines
+### unixNewlines
 
 Type: boolean
 default: true on *nix (Mac OSX, Linux, FreeBSD, etc), false on windows
 
 Use unix style newlines in output.
 
-# precision
+### precision
 
 Type: Number
 Default: 5
