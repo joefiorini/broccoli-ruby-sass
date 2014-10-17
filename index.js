@@ -6,6 +6,7 @@ var Writer = require('broccoli-caching-writer');
 var dargs = require('dargs');
 var spawn = require('win-spawn');
 var Promise = require('rsvp').Promise;
+var _ = require('lodash');
 
 SassCompiler.prototype = Object.create(Writer.prototype);
 SassCompiler.prototype.constructor = SassCompiler;
@@ -28,7 +29,7 @@ function SassCompiler (inputTree, inputFile, outputFile, options) {
     unixNewlines: options.unixNewlines,
     cacheLocation: options.cacheLocation
   };
-  this.customArgs = customArgs || [];
+  this.customArgs = options.customArgs || [];
 }
 
 SassCompiler.prototype.updateCache = function (srcDir, destDir) {
@@ -39,13 +40,22 @@ SassCompiler.prototype.updateCache = function (srcDir, destDir) {
   mkdirp.sync(path.dirname(destFile));
 
   includePaths.unshift(path.dirname(this.inputFile));
-  this.sassOptions.loadPath = this.sassOptions.loadPath.concat(includePaths);
-  var passedArgs = dargs(this.sassOptions, ['bundleExec']);
+
+  var loadPaths = this.sassOptions.loadPath;
+  var loadPath = srcDir.map(function(dir){
+    return loadPaths.map(function(loadPath){
+      return path.join(dir, loadPath);
+    });
+  });
+  loadPath = _.flatten(loadPath);
+  loadPath = loadPath.concat(includePaths);
+  loadPath = dargs({loadPath: loadPath});
+  var passedArgs = dargs(this.sassOptions, ['bundleExec', 'loadPath']);
   var args = [
     'sass',
     includePathSearcher.findFileSync(this.inputFile, includePaths),
     destFile
-  ].concat(passedArgs).concat(self.customArgs);
+  ].concat(passedArgs).concat(this.customArgs).concat(loadPath);
 
   if(bundleExec) {
     args.unshift('bundle', 'exec');
