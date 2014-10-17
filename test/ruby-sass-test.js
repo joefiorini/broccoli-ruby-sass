@@ -21,7 +21,7 @@ describe('broccoli-ruby-sass', function() {
 
   beforeEach(function() {
     return build().then(function(dir) {
-      builtTo = dir;
+      builtTo = dir.directory;
     });
   });
 

@@ -1,3 +1,4 @@
+/* jshint node: true */
 var path = require('path');
 var mkdirp = require('mkdirp');
 var includePathSearcher = require('include-path-searcher');
@@ -5,7 +6,6 @@ var Writer = require('broccoli-caching-writer');
 var dargs = require('dargs');
 var spawn = require('win-spawn');
 var Promise = require('rsvp').Promise;
-var mergeTrees = require('broccoli-merge-trees');
 
 module.exports = SassCompiler;
 SassCompiler.prototype = Object.create(Writer.prototype);
@@ -13,7 +13,7 @@ SassCompiler.prototype.constructor = SassCompiler;
 
 function SassCompiler (inputTree, inputFile, outputFile, options) {
   if (!(this instanceof SassCompiler)) return new SassCompiler(inputTree, inputFile, outputFile, options);
-  this.inputTree = mergeTrees(inputTree);
+  Writer.call(this, inputTree, options);
   this.inputFile = inputFile;
   this.outputFile = outputFile;
   options = options || {};
