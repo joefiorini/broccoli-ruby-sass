@@ -99,6 +99,13 @@ How many digits of precision to use when outputting decimal numbers.
 
 An string of filesystem path or importers which should be searched for Sass templates imported with the @import directive.
 
+### customArgs
+
+Type: Array
+Default: []
+
+Custom arguments that don't have a value, such as `--compass` and friends.
+
 <!-- links -->
 
 [bundler]: http://bundler.io/
