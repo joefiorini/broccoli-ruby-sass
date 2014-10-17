@@ -25,7 +25,8 @@ function SassCompiler (inputTree, inputFile, outputFile, options) {
     require: options.require,
     loadPath: options.loadPath || [],
     precision: options.precision,
-    unixNewlines: options.unixNewlines
+    unixNewlines: options.unixNewlines,
+    cacheLocation: options.cacheLocation
   };
   this.customArgs = customArgs || [];
 }
@@ -74,11 +75,11 @@ SassCompiler.prototype.updateCache = function (srcDir, destDir) {
 
     var errors = '';
 
-    cp.on('data', function(data) {
+    cp.on('data', function(data){
       // ignore deprecation warnings
 
-      if (isWarning(err)) {
-        console.warn(err);
+      if (isWarning(data)) {
+        console.warn(data);
         return;
       }
 
