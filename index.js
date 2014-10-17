@@ -1,4 +1,4 @@
-var fs = require('fs');
+/* jshint node: true */
 var path = require('path');
 var mkdirp = require('mkdirp');
 var includePathSearcher = require('include-path-searcher');
@@ -20,7 +20,7 @@ function SassCompiler (sourceTrees, inputFile, outputFile, options) {
     imagePath: options.imagePath,
     style: options.outputStyle,
     sourceComments: options.sourceComments,
-    sourcemap: options.sourceMap,
+    sourcemap: options.sourceMap || 'none',
     bundleExec: options.bundleExec,
     require: options.require,
     loadPath: options.loadPath || []
@@ -51,6 +51,7 @@ SassCompiler.prototype.read = function (readTree) {
       if(path.extname(self.inputFile) === '.css') {
         args.push('--scss');
       }
+
 
       return new Promise(function(resolve, reject) {
         var cmd = args.shift();

@@ -31,8 +31,8 @@ describe('broccoli-ruby-sass', function() {
   });
 
   it('compiles templates with @extend', function() {
-    var actualPath = require('path').resolve('./' + builtTo + '/splitbutton.css');
-    console.log(actualPath);
+    var actualPath = require('path').join(builtTo, '/splitbutton.css');
+    var fs = require('fs');
     var readActual = readFile.bind(null, actualPath);
     var readExpected = readFile.bind(null, './test/output/splitbutton.css');
     return RSVP.all([readActual(), readExpected()]).then(function(result) {

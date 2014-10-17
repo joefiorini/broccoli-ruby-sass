@@ -9,6 +9,7 @@ module.exports = function(broccoli) {
     });
 
   return compileSass([tree], 'splitbutton.scss', 'splitbutton.css', {
-    outputStyle: 'expanded'
+    outputStyle: 'expanded',
+    sourceMap: false
   });
 };

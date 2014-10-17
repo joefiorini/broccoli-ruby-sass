@@ -37,7 +37,7 @@
     "mkdirp": "^0.3.5",
     "quick-temp": "^0.1.0",
     "promise-map-series": "^0.2.0",
-    "dargs": "^0.1.0",
+    "dargs": "^2.0.0",
     "win-spawn": "^2.0.0",
     "include-path-searcher": "^0.1.0",
     "lodash": "^2.4.1",
