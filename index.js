@@ -7,7 +7,6 @@ var dargs = require('dargs');
 var spawn = require('win-spawn');
 var Promise = require('rsvp').Promise;
 
-module.exports = SassCompiler;
 SassCompiler.prototype = Object.create(Writer.prototype);
 SassCompiler.prototype.constructor = SassCompiler;
 
@@ -28,6 +27,7 @@ function SassCompiler (inputTree, inputFile, outputFile, options) {
     precision: options.precision,
     unixNewlines: options.unixNewlines
   };
+  this.customArgs = customArgs || [];
 }
 
 SassCompiler.prototype.updateCache = function (srcDir, destDir) {
@@ -44,7 +44,7 @@ SassCompiler.prototype.updateCache = function (srcDir, destDir) {
     'sass',
     includePathSearcher.findFileSync(this.inputFile, includePaths),
     destFile
-  ].concat(passedArgs);
+  ].concat(passedArgs).concat(self.customArgs);
 
   if(bundleExec) {
     args.unshift('bundle', 'exec');
@@ -106,3 +106,5 @@ SassCompiler.prototype.updateCache = function (srcDir, destDir) {
     });
   });
 };
+
+module.exports = SassCompiler;
