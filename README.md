@@ -71,6 +71,7 @@ By default, requires no ruby library.
 ``
 
 # bundleExec
+
 Type: boolean
 Default: false
 
@@ -78,8 +79,23 @@ Use [bundler][bundler] when running ruby. Useful for
 locking down the ruby version between projects.
 
 # loadPath
+
 Type: string
 Default: ''
+
+# unixNewlines
+
+Type: boolean
+default: true on *nix (Mac OSX, Linux, FreeBSD, etc), false on windows
+
+Use unix style newlines in output.
+
+# precision
+
+Type: Number
+Default: 5
+
+How many digits of precision to use when outputting decimal numbers.
 
 An string of filesystem path or importers which should be searched for Sass templates imported with the @import directive.
 
