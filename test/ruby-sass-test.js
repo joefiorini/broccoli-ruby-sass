@@ -14,14 +14,9 @@ describe('broccoli-ruby-sass', function() {
   var builtTo;
 
   function build() {
-    return new RSVP.Promise(function(resolve) {
-      var tree = broccoli.loadBrocfile();
-      var builder = new broccoli.Builder(tree);
-      return builder.build().then(function(dir) {
-        // TODO: If I don't do this, the file built does not exist to node, huh?
-        setTimeout(resolve.bind(null, dir), 750);
-      });
-    });
+    var tree = broccoli.loadBrocfile();
+    var builder = new broccoli.Builder(tree);
+    return builder.build();
   }
 
   beforeEach(function() {
@@ -31,8 +26,7 @@ describe('broccoli-ruby-sass', function() {
   });
 
   it('compiles templates with @extend', function() {
-    var actualPath = require('path').join(builtTo, '/splitbutton.css');
-    var fs = require('fs');
+    var actualPath = require('path').resolve(builtTo + '/splitbutton.css');
     var readActual = readFile.bind(null, actualPath);
     var readExpected = readFile.bind(null, './test/output/splitbutton.css');
     return RSVP.all([readActual(), readExpected()]).then(function(result) {
