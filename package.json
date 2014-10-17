@@ -27,11 +27,12 @@
   },
   "homepage": "https://github.com/joefiorini/broccoli-ruby-sass",
   "devDependencies": {
-    "rsvp": "^3.0.6",
+    "broccoli": "^0.13.2",
+    "broccoli-merge-trees": "^0.2.1",
     "chai": "^1.9.1",
     "chai-as-promised": "^4.1.1",
     "mocha": "^1.18.2",
-    "broccoli": "^0.7.2"
+    "rsvp": "^3.0.6"
   },
   "dependencies": {
     "broccoli": "^0.13.2",
