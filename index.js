@@ -26,7 +26,8 @@ function SassCompiler (inputTree, inputFile, outputFile, options) {
     require: options.require,
     loadPath: options.loadPath || [],
     precision: options.precision,
-    unixNewlines: options.unixNewlines
+    unixNewlines: options.unixNewlines,
+    cacheLocation: options.cacheLocation
   };
   this.customArgs = options.customArgs || [];
 }
@@ -83,6 +84,17 @@ SassCompiler.prototype.updateCache = function (srcDir, destDir) {
     });
 
     var errors = '';
+
+    cp.on('data', function(data){
+      // ignore deprecation warnings
+
+      if (isWarning(data)) {
+        console.warn(data);
+        return;
+      }
+
+      errors += data;
+    });
 
     cp.stderr.on('data', function(data) {
       if (!isWarning(data)) {

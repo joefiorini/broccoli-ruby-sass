@@ -17,7 +17,7 @@ compileRubySass('styles', 'main.scss', 'main.css', {
   bundleExec: true,
   require: 'someRubyThingToRequire',
   loadPath: 'load path'
-})
+});
 ```
 
 ## Options
@@ -105,6 +105,13 @@ Type: Array
 Default: []
 
 Custom arguments that don't have a value, such as `--compass` and friends.
+
+### cacheLocation
+
+Type: string
+default: .sass-cache
+
+Place to put the sass cache files.
 
 <!-- links -->
 
