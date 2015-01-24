@@ -16,6 +16,7 @@ compileRubySass('styles', 'main.scss', 'main.css', {
   sourcemap: 'none',
   bundleExec: true,
   require: 'someRubyThingToRequire',
+  compass: true,
   loadPath: 'load path'
 });
 ```
@@ -69,6 +70,13 @@ Type: string
 Require a ruby library before running the SASS compiler.
 By default, requires no ruby library.
 ``
+
+### compass
+
+Type: boolean
+
+Use compass mixins , will be passed as `--compass` to sass arguments.
+
 
 ### bundleExec
 
