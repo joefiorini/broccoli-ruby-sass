@@ -24,6 +24,7 @@ function SassCompiler (inputTree, inputFile, outputFile, options) {
     sourcemap: options.sourceMap || 'none',
     bundleExec: options.bundleExec,
     require: options.require,
+    compass: options.compass || false,
     loadPath: options.loadPath || [],
     precision: options.precision,
     unixNewlines: options.unixNewlines,
